@@ -1,0 +1,7 @@
+﻿  golems.cpp
+c:\users\qazth\documents\school work\gr 12\cs\golems\golems\golems.cpp(26): warning C4018: '<': signed/unsigned mismatch
+c:\users\qazth\documents\school work\gr 12\cs\golems\golems\golems.cpp(65): warning C4018: '<': signed/unsigned mismatch
+c:\users\qazth\documents\school work\gr 12\cs\golems\golems\golems.cpp(77): warning C4018: '<': signed/unsigned mismatch
+c:\users\qazth\documents\school work\gr 12\cs\golems\golems\golems.cpp(154): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\qazth\documents\school work\gr 12\cs\golems\golems\golems.cpp(255): warning C4018: '<': signed/unsigned mismatch
+  golems.vcxproj -> C:\Users\qazth\Documents\School Work\gr 12\cs\golems\Debug\golems.exe
