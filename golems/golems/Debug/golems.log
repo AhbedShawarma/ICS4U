@@ -1,7 +1,1 @@
-﻿  golems.cpp
-h:\documents\github\ics4u\golems\golems\golems.cpp(26): warning C4018: '<': signed/unsigned mismatch
-h:\documents\github\ics4u\golems\golems\golems.cpp(65): warning C4018: '<': signed/unsigned mismatch
-h:\documents\github\ics4u\golems\golems\golems.cpp(77): warning C4018: '<': signed/unsigned mismatch
-h:\documents\github\ics4u\golems\golems\golems.cpp(154): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-h:\documents\github\ics4u\golems\golems\golems.cpp(256): warning C4018: '<': signed/unsigned mismatch
-  golems.vcxproj -> H:\Documents\GitHub\ICS4U\golems\Debug\golems.exe
+﻿  golems.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\golems\Debug\golems.exe
