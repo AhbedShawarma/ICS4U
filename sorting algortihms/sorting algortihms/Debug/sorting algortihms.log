@@ -1,6 +1,1 @@
-﻿  sorting algortihms.cpp
-c:\users\qazth\documents\github\ics4u\sorting algortihms\sorting algortihms\sorting algortihms.cpp(102): warning C4018: '<': signed/unsigned mismatch
-c:\users\qazth\documents\github\ics4u\sorting algortihms\sorting algortihms\sorting algortihms.cpp(195): warning C4101: 'begin': unreferenced local variable
-c:\users\qazth\documents\github\ics4u\sorting algortihms\sorting algortihms\sorting algortihms.cpp(196): warning C4101: 'end': unreferenced local variable
-c:\users\qazth\documents\github\ics4u\sorting algortihms\sorting algortihms\sorting algortihms.cpp(198): warning C4101: 'elapsedTime': unreferenced local variable
-  sorting algortihms.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\sorting algortihms\Debug\sorting algortihms.exe
+﻿

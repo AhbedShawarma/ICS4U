@@ -11,6 +11,8 @@ Description: The program reads in files that include n numbers, sorts the number
 #include <fstream>	// for reading in files
 #include <string>	// to use strings
 #include <vector>	// to use vectors
+#include <chrono>
+#include <ratio>
 
 using namespace std;
 
@@ -202,7 +204,7 @@ int main() {
 	double elapsedTime;
 	
 	// while loop that will read and sort files with numbers up to n = 100000
-	while (n < 100000) {
+	while (n < 10000) {
 		// set the number of integers in the file 10 times greater than the previous
 		n *= 10;
 		// create vectors to store the numbers in the file, originalNumbers will always store the unsorted numbers
@@ -228,11 +230,11 @@ int main() {
 			// set of if statements that decide which algorithm to run based on y's value
 			if (y == 0) {
 				// starts and clock, calls the sorting algorithm, and ends the clock
-				clock_t begin = clock();
+				chrono::high_resolution_clock::time_point b = chrono::high_resolution_clock::now();
 				selectionSort(numbersToSort, n);
-				clock_t end = clock();
+				chrono::high_resolution_clock::time_point e = chrono::high_resolution_clock::now();
 				// outputs the time it took to sort the numbers
-				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
+				double elapsed_secs = double((e - b).count()) / double(1000000000);
 				cout << "N = " << n << ", Selection Sort: ";
 				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
 
