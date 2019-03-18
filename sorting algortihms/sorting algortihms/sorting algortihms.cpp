@@ -1,33 +1,40 @@
-// sorting algorithms.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+/*
+Name: Abhay Sharma
+Date: March 1, 2019
+Description: The program reads in files that include n numbers, sorts the numbers using different sorting alogrithms, and output the time it took for each algorithm to sort the numbers 
+*/
 
 #include "pch.h"
-#include <ctime>
-#include <iostream>
-#include <stdio.h>  //c style output "printf"
-#include <fstream>
-#include <string>
-#include <vector>
+#include <ctime>	// for timing the results
+#include <iostream> // for cout
+#include <stdio.h>  // c style output "printf"
+#include <fstream>	// for reading in files
+#include <string>	// to use strings
+#include <vector>	// to use vectors
 
 using namespace std;
 
+void selectionSort(vector<int>& sortingNumbers, int size) {
+	// pre:	 takes in a vector of integers and an integer size that is the length of the vector
+	// post: sorts the vector's integers from smallest to greatest
 
-void selectionSort(vector<int>& sortingNumbers) {
-
-	int size = sortingNumbers.size();
+	// variable to count through the numbers to sort
 	int i, j;
+	// variable to store the smallest number
 	int iMin;
 
+	// for loop that counts through the vector
 	for (j = 0; j < size - 1; j++) {
+		// set smallesst number to the current element, j
 		iMin = j;
+		// for loop that iterates through the rest of the numbers to check if j is the smallest number
 		for (i = j + 1; i < size; i++) {
-			/* if this element is less, then it is the new minimum */
+			// if i is less than the current lowest number, set i to the lowest number
 			if (sortingNumbers[i] < sortingNumbers[iMin]) {
-				/* found new minimum; remember its index */
 				iMin = i;
 			}
 		}
-
+		// if the lowest number is not j, swap the 2 numbers
 		if (iMin != j) {
 			swap(sortingNumbers[j], sortingNumbers[iMin]);
 		}
@@ -35,177 +42,192 @@ void selectionSort(vector<int>& sortingNumbers) {
 
 }
 
-void bubbleSort(vector<int>& sortingNumbers) {
-	int size = sortingNumbers.size();
+void bubbleSort(vector<int>& sortingNumbers, int size) {
+	// pre:	 takes in a vector of integers and an integer size that is the length of the vector
+	// post: sorts the vector's integers from smallest to greatest
+
+	// a do while loop that only exits when size = 0, which will only be possible if all numbers are sorted since n will equal 0 in that case
 	do {
+		// set n to 0
 		int n = 0;
+		// for loop that iterates through the numbers in the vector
 		for (int i = 1; i < size; i++) {
+			// if the element before i is greater than i, swap the element i-1 and i and set n equal to i
 			if (sortingNumbers[i - 1] > sortingNumbers[i]) {
 				swap(sortingNumbers[i - 1], sortingNumbers[i]);
 				n = i;
 			}
 		}
+		// set size equal to n
 		size = n;
 
 	} while (size != 0);
 }
 
 void merge(vector<int>& numbers, int l, int m, int r) {
+	// pre:	 takes in a vector of integers, the left index, the middle index, and the right index of the vector
+	// post: sorts the elements in the numbers vector from smallest to greatest
+
+	// creates a vector that stores the sorted numbers
 	vector<int> sorted;
+	// declares integers to interate through the vector's elements
 	int i = 0, j = 0;
+
+	// a for loop where i iterates through the elements from l to m and j iterates through the elements from m+1 to r compare the elements in the vector and sort them
 	for (i = l, j = m + 1; i <= m && j <= r;) {
+		// if the element at i is less than j, add i to to the sorted and go to the next element in the first half of the vector (l to m+1)
 		if (numbers[i] < numbers[j]) {
 			sorted.push_back(numbers[i]);
 			i++;
 		}
+		// else, add j to the sorted vector and go to the next element in the in the second half of the vector (m+1 to r)
 		else {
 			sorted.push_back(numbers[j]);
 			j++;
 		}
 	}
 
+	// while i is less than or equal to m, that means there are elements that have not been added to the sorted vector so this loop will add them to the vector
 	while (i <= m) {
 		sorted.push_back(numbers[i]);
 		i++;
 	}
+	// while j is less than or equal to r, that means there are elements that have not been added to the sorted vector so this loop will add them to the vector
 	while (j <= r) {
 		sorted.push_back(numbers[j]);
 		j++;
 	}
 
+	// for loop that puts the sorted integers into the numbers vector
 	for (int i = 0; i < sorted.size(); i++)
 		numbers[l + i] = sorted[i];
 }
 
 void mergeSort(vector<int>& sortingNumbers, int l, int r) {
+	// pre:	 takes in a vector of integers, the left index (l), and the right index (r) of the vector
+	// post: sorts the vector's integers from smallest to greatest
+
 	if (r > l) {
+		// finds the middle of the vector to split it half
 		int middle = (l + r) / 2;
+		// calls mergeSort for the first half of the vector
 		mergeSort(sortingNumbers, l, middle);
+		// calls mergeSort for the second half of the vector
 		mergeSort(sortingNumbers, middle + 1, r);
+		// calls the merge function to merge the vectors
 		merge(sortingNumbers, l, middle, r);
 	}
 }
 
 void mergeSort(vector<int>& sortingNumbers) {
+	// pre:	 takes in a vector of integers
+	// post: calls mergeSort to sort the numbers in the vector from smallest to greatest
 	mergeSort(sortingNumbers, 0, sortingNumbers.size() - 1);
 }
 
-int partition(vector<int>& numbers, int low, int high) {
-	int pivot = numbers.at(low);
-	int leftwall = low;
+int partition(vector<int>& numbers, int l, int r) {
+	// pre:	 takes in a vector of integers, the starting index (l), and the ending index (r) of the vector
+	// post: places the pivot at the correct location and all numbers less than the pivot before it, and the numbers greater than the pivot after it
 
-	for (int j = low + 1; j <= high; j++) {
+	// the pivot point is the element at l
+	int pivot = numbers[l];
+	// set a leftwall which is the index of the left most sorted element
+	int leftwall = l;
+
+	// for loop that iterates through the elements of the vector
+	for (int j = l + 1; j <= r; j++) {
+		// if the current element (j) is less than the pivot, add one to leftwall and swap the elements at j and at leftwall
 		if (numbers[j] < pivot) {
 			leftwall++;
 			swap(numbers[leftwall], numbers[j]);
 		}
 	}
-	swap(numbers[leftwall], numbers[low]);
+	// swap the element at leftwall with the element at l so the pivot is at the correct location
+	swap(numbers[leftwall], numbers[l]);
 	return leftwall;
 }
 
-void quickSort(vector<int>& sortingNumbers, int low, int high) {
-	if (low < high) {
-		int pi = partition(sortingNumbers, low, high);
-		quickSort(sortingNumbers, low, pi - 1);
-		quickSort(sortingNumbers, pi + 1, high);
+void quickSort(vector<int>& sortingNumbers, int l, int r) {
+	// pre:	 takes in a vector of integers, the starting index (l), and the ending index (r) of the vector
+	// post: sorts the vector's integers from smallest to greatest
+
+	if (l < r) {
+		int pi = partition(sortingNumbers, l, r);
+		quickSort(sortingNumbers, l, pi - 1);
+		quickSort(sortingNumbers, pi + 1, r);
 	}
 }
 
 void quickSort(vector<int>& sortingNumbers) {
+	// pre:	 takes in a vector of integers
+	// post: calls quickSort to sort the numbers in the vector from smallest to greatest
 	quickSort(sortingNumbers, 0, sortingNumbers.size() - 1);
 }
 
-void insertionSort(vector<int>& sortingNumbers) {
-	int i, j;
-	int value;
-	int size = sortingNumbers.size();
+void insertionSort(vector<int>& sortingNumbers, int size) {
+	// pre:	 takes in a vector of integers and an integer size that is the length of the vector
+	// post: sorts the vector's integers from smallest to greatest
+
+	int i, j, value;
+
+	// iterates through the vector of integers
 	for (i = 1; i < size; i++) {
+		// sets j to the index right before i
 		j = i - 1;
+		// sets the value to the element at index i
 		value = sortingNumbers[i];
 
+		// while j is greater than or equal to 0 and the element at j is less than the value, move the element ahead by one
 		while (j >= 0 && value < sortingNumbers[j]) {
 			sortingNumbers[j + 1] = sortingNumbers[j];
 			j--;
 		}
-		sortingNumbers.at(j + 1) = value;
+		// sets element at j+1 to value
+		sortingNumbers[j + 1] = value;
 	}
 }
 
-void algorithmToUse(int n, vector<int> &originalNumbers) {
-	vector<int> numbersToSort;
-	for (int i = 0; i < originalNumbers.size(); i++) {
-		numbersToSort.push_back(originalNumbers[i]);
-	}
-
-	if (n == 0) {
-		clock_t begin = clock();
-		selectionSort(numbersToSort);
-		clock_t end = clock();
-
-		double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
-		printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
-	}
-	else if (n == 1) {
-		clock_t begin = clock();
-		bubbleSort(numbersToSort);
-		clock_t end = clock();
-
-		double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
-		printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
-	}
-	if (n == 2) {
-		clock_t begin = clock();
-		mergeSort(numbersToSort);
-		clock_t end = clock();
-
-		double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
-		printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
-	}
-	if (n == 3) {
-		clock_t begin = clock();
-		quickSort(numbersToSort);
-		clock_t end = clock();
-
-		double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
-		printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
-	}
-	else {
-		clock_t begin = clock();
-		insertionSort(numbersToSort);
-		clock_t end = clock();
-
-		double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
-		printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
-	}
-
-}
 
 int main() {
 	int n = 1;
+
+	// variables that will store the beginning and end clock times
+	clock_t begin;
+	clock_t end;
+
+	double elapsedTime;
+	
+	// while loop that will read and sort files with numbers up to n = 100000
 	while (n < 100000) {
+		// set the number of integers in the file 10 times greater than the previous
 		n *= 10;
-		vector<int> sortingNumbers;
+		// create vectors to store the numbers in the file, originalNumbers will always store the unsorted numbers
+		vector<int> originalNumbers;
 		vector<int> numbersToSort;
+
 		int input;
-
+		// open the file
 		ifstream file("data" + to_string(n) + ".txt");
-
+		// store the numbers in the file to vector originalNumbers
 		while (file >> input) {
-			sortingNumbers.push_back(input);
+			originalNumbers.push_back(input);
 		}
 
-
-
+		// for loop that runs 5 times, for each sorting alogrithm
 		for (int y = 0; y < 5; y++) {
-			for (int i = 0; i < n; i++) {
-				numbersToSort.push_back(sortingNumbers[i]);
-			}
-			if (y == 0) {
-				clock_t begin = clock();
-				selectionSort(numbersToSort);
-				clock_t end = clock();
 
+			// for loop that adds the numbers in originalNumbers to numbersToSort
+			for (int i = 0; i < n; i++) {
+				numbersToSort.push_back(originalNumbers[i]);
+			}
+
+			// set of if statements that decide which algorithm to run based on y's value
+			if (y == 0) {
+				// starts and clock, calls the sorting algorithm, and ends the clock
+				clock_t begin = clock();
+				selectionSort(numbersToSort, n);
+				clock_t end = clock();
+				// outputs the time it took to sort the numbers
 				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
 				cout << "N = " << n << ", Selection Sort: ";
 				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
@@ -214,13 +236,14 @@ int main() {
 
 			else if (y == 1) {
 				clock_t begin = clock();
-				bubbleSort(numbersToSort);
+				bubbleSort(numbersToSort, n);
 				clock_t end = clock();
 
 				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
 				cout << "N = " << n << ", Bubble Sort: ";
 				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
 			}
+
 			else if (y == 2) {
 				clock_t begin = clock();
 				mergeSort(numbersToSort);
@@ -230,6 +253,7 @@ int main() {
 				cout << "N = " << n << ", Merge Sort: ";
 				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
 			}
+
 			else if (y == 3) {
 				clock_t begin = clock();
 				quickSort(numbersToSort);
@@ -239,19 +263,22 @@ int main() {
 				cout << "N = " << n << ", Quick Sort: ";
 				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
 			}
+
 			else {
 				clock_t begin = clock();
-				insertionSort(numbersToSort);
+				insertionSort(numbersToSort, n);
 				clock_t end = clock();
 
 				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
 				cout << "N = " << n << ", Insertion Sort: ";
 				printf("Elapsed time is %.9f seconds. \n\n", elapsed_secs);
 			}
+			
+			// clears the numbers in numberToSort so the next sorting algorithm will sort the unsorted numbers
 			numbersToSort.clear();
 		}
-
-		sortingNumbers.clear();
+		// clears originalNumbers so the elements from the current file do not remain in the vector when sorting the numbers in the next file
+		originalNumbers.clear();
 	}
 	return 0;
 }
