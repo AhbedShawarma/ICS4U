@@ -144,6 +144,7 @@ int partition(vector<int>& numbers, int l, int r) {
 	}
 	// swap the element at leftwall with the element at l so the pivot is at the correct location
 	swap(numbers[leftwall], numbers[l]);
+	// return the leftwall to act as the partition index
 	return leftwall;
 }
 
@@ -152,8 +153,11 @@ void quickSort(vector<int>& sortingNumbers, int l, int r) {
 	// post: sorts the vector's integers from smallest to greatest
 
 	if (l < r) {
+		// set pi to the index of pivot point
 		int pi = partition(sortingNumbers, l, r);
+		// sort the elements from l to pi - 1
 		quickSort(sortingNumbers, l, pi - 1);
+		// sort the elements from pi + 1 to r
 		quickSort(sortingNumbers, pi + 1, r);
 	}
 }
