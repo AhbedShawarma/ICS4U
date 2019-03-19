@@ -196,15 +196,9 @@ void insertionSort(vector<int>& sortingNumbers, int size) {
 
 int main() {
 	int n = 1;
-
-	// variables that will store the beginning and end clock times
-	clock_t begin;
-	clock_t end;
-
-	double elapsedTime;
 	
 	// while loop that will read and sort files with numbers up to n = 100000
-	while (n < 10000) {
+	while (n < 100000) {
 		// set the number of integers in the file 10 times greater than the previous
 		n *= 10;
 		// create vectors to store the numbers in the file, originalNumbers will always store the unsorted numbers
@@ -230,54 +224,50 @@ int main() {
 			// set of if statements that decide which algorithm to run based on y's value
 			if (y == 0) {
 				// starts and clock, calls the sorting algorithm, and ends the clock
-				chrono::high_resolution_clock::time_point b = chrono::high_resolution_clock::now();
+				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				selectionSort(numbersToSort, n);
-				chrono::high_resolution_clock::time_point e = chrono::high_resolution_clock::now();
+				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+				
 				// outputs the time it took to sort the numbers
-				double elapsed_secs = double((e - b).count()) / double(1000000000);
 				cout << "N = " << n << ", Selection Sort: ";
-				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
+				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
 
 			}
 
 			else if (y == 1) {
-				clock_t begin = clock();
+				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				bubbleSort(numbersToSort, n);
-				clock_t end = clock();
-
-				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
+				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+				
 				cout << "N = " << n << ", Bubble Sort: ";
-				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
+				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
 			}
 
 			else if (y == 2) {
-				clock_t begin = clock();
+				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				mergeSort(numbersToSort);
-				clock_t end = clock();
+				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 
-				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
 				cout << "N = " << n << ", Merge Sort: ";
-				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
+				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
 			}
 
 			else if (y == 3) {
-				clock_t begin = clock();
+				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				quickSort(numbersToSort);
-				clock_t end = clock();
+				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 
-				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
 				cout << "N = " << n << ", Quick Sort: ";
-				printf("Elapsed time is %.9f seconds. \n", elapsed_secs);
+				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
 			}
 
 			else {
-				clock_t begin = clock();
+				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				insertionSort(numbersToSort, n);
-				clock_t end = clock();
+				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 
-				double elapsed_secs = double(end - begin) / double(CLOCKS_PER_SEC);
 				cout << "N = " << n << ", Insertion Sort: ";
-				printf("Elapsed time is %.9f seconds. \n\n", elapsed_secs);
+				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n\n";
 			}
 			
 			// clears the numbers in numberToSort so the next sorting algorithm will sort the unsorted numbers
