@@ -25,8 +25,8 @@ void instructionsDisplayer(string input, HANDLE colour) {
 	SetConsoleTextAttribute(colour, 4);
 
 	if (input == "I") {
-		cout << "\nINSTRUCTIONS: \n"
-			<< "You must find the correct order to use four spells to stop the golems. These spells are \n" 
+		cout << "\nINSTRUCTIONS: \n";
+		cout << "You must find the correct order to use four spells to stop the golems. These spells are \n" 
 			<< "based on the 4 elements, Fire, Water, Air, and Earth. The order only consists of the 4 \n"
 			<< "elemental spells but there could be duplicates so not all 4 must be present in the \n"
 			<< "correct order. Fortunately, the golems have eyes that will glow in a way that will give \n" 
@@ -36,6 +36,8 @@ void instructionsDisplayer(string input, HANDLE colour) {
 			<< "fire, W for water, A for air, and E for earth and you will recieve a hint consisting \n" 
 			<< "of Rs and Bs. \n\n\n";
 	}
+	SetConsoleTextAttribute(colour, 4);
+
 }
 
 void toUpperCase(string &str) {
