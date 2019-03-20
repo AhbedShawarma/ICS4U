@@ -19,17 +19,22 @@ Description: The program prompts the user to play a game that involves the user 
 
 using namespace std;
 
-void instructionsDisplayer(string input) {
+void instructionsDisplayer(string input, HANDLE colour) {
 	//pre:	takes in user input to check if they want instructions
 	//post:	if user input equals "I", outputs instructions
+	SetConsoleTextAttribute(colour, 4);
 
 	if (input == "I") {
-		cout << "INSTRUCTIONS: \n"
-			<< "You must find the correct order to use four spells to stop the golems. These spells are based on the 4 elements, Fire, Water, Air, and Earth. \n"
-			<< "The order only consists of the 4 elemental spells but there could be duplicates so not all 4 must be present in the correct order. \n"
-			<< "Fortunately, the golems have eyes that will glow in a way that will give you some clues. Their eyes will glow RED for each element \n"
-			<< "that is in the correct location.Their eyes will glow BLUE for each element that is correctly included, but in the wrong location. \n"
-			<< " You will enter your guess which will consist of 4 letters, F for fire, W for water, A for air, and E for earth and you will recieve a hint consisting of Rs and Bs. \n\n\n";
+		cout << "\nINSTRUCTIONS: \n"
+			<< "You must find the correct order to use four spells to stop the golems. These spells are \n" 
+			<< "based on the 4 elements, Fire, Water, Air, and Earth. The order only consists of the 4 \n"
+			<< "elemental spells but there could be duplicates so not all 4 must be present in the \n"
+			<< "correct order. Fortunately, the golems have eyes that will glow in a way that will give \n" 
+			<< "you some clues. Their eyes will glow RED for each element that is in the correct \n" 
+			<< "location.Their eyes will glow BLUE for each element that is correctly included, but in \n" 
+			<< "the wrong location. You will enter your guess which will consist of 4 letters, F for \n" 
+			<< "fire, W for water, A for air, and E for earth and you will recieve a hint consisting \n" 
+			<< "of Rs and Bs. \n\n\n";
 	}
 }
 
@@ -128,7 +133,7 @@ string passwordCreator() {
 	return element;
 }
 
-void secretHintMaker(string password, string guess) {
+void secretHintMaker(string password, string guess, HANDLE consoleColour) {
 	//pre:	the function takes in the password and a valid user guess
 	//post: the function outputs if the selected element is either in the correct location, present in the password but not in the correct locatio, or if it is not present in the password
 
@@ -146,7 +151,7 @@ void secretHintMaker(string password, string guess) {
 	// a do while loop that keeps letting the user input and only exits when the user enters a valid input
 	while (!(inputChecker(1, hintInput, hintLetter))) {
 		// calls on instructionsDisplayer to output instructions if the user wanted them
-		instructionsDisplayer(hintLetter);
+		instructionsDisplayer(hintLetter, consoleColour);
 		if (hintLetter != "I") {
 			cout << "INVALID ENTRY!" << endl;
 		}
@@ -212,7 +217,7 @@ int main()
 		cin >> instructions;
 		toUpperCase(instructions);
 		// calls on instructionsDisplayer to output instructions if the user wanted them
-		instructionsDisplayer(instructions);
+		instructionsDisplayer(instructions, hConsole);
 
 		// difficulty descriptions, prompts the user to enter their preferred difficulty
 		cout << "Choose your difficulty \n"
@@ -234,7 +239,7 @@ int main()
 		// a while loop that checks if the user input is valid and keeps prompting the user to enter until they enter a valid response
 		while (!(inputChecker(1, validDifficultyInput, difficulty))) {
 			// calls on instructionsDisplayer to output instructions if the user wanted them
-			instructionsDisplayer(difficulty);
+			instructionsDisplayer(difficulty, hConsole);
 			if (difficulty != "I") {
 				cout << "INVALID ENTRY!" << endl;
 			}
@@ -262,7 +267,7 @@ int main()
 			// a while loop that checks if the user input is valid and keeps prompting the user to enter until they enter a valid response
 			while (!(inputChecker(4, validPasswordInput, userGuess))) {
 				// calls on instructionsDisplayer to output instructions if the user wanted them
-				instructionsDisplayer(userGuess);
+				instructionsDisplayer(userGuess, hConsole);
 				if (userGuess != "I") {
 					cout << "INVALID ENTRY!" << endl;
 				}
@@ -305,7 +310,7 @@ int main()
 			// if the user is on their fith guess and have chosen medium difficulty, the user is prompted with a secret hint
 			if (numOfGuesses == 5 && difficulty == "M") {
 				cout << "Psst, hey there, you only have 5 guesses remaining, I'll give you a bonus hint about the password based on the elements you just guessed." << endl;
-				secretHintMaker(password, userGuess);
+				secretHintMaker(password, userGuess, hConsole);
 			}
 		}
 
