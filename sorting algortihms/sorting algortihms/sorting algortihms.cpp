@@ -1,7 +1,7 @@
 /*
 Name: Abhay Sharma
 Date: March 1, 2019
-Description: The program reads in files that include n numbers, sorts the numbers using different sorting alogrithms, and output the time it took for each algorithm to sort the numbers 
+Description: The program reads in files that include n numbers, sorts the numbers using different sorting alogrithms, and output the time it took for each algorithm to sort the numbers
 */
 
 #include "pch.h"
@@ -13,7 +13,6 @@ Description: The program reads in files that include n numbers, sorts the number
 #include <vector>	// to use vectors
 #include <chrono>
 #include <ratio>
-
 using namespace std;
 
 void selectionSort(vector<int>& sortingNumbers, int size) {
@@ -196,7 +195,7 @@ void insertionSort(vector<int>& sortingNumbers, int size) {
 
 int main() {
 	int n = 1;
-	
+
 	// while loop that will read and sort files with numbers up to n = 100000
 	while (n < 100000) {
 		// set the number of integers in the file 10 times greater than the previous
@@ -207,11 +206,14 @@ int main() {
 
 		int input;
 		// open the file
-		ifstream file("data" + to_string(n) + ".txt");
+		ifstream file("data100000.txt");
 		// store the numbers in the file to vector originalNumbers
-		while (file >> input) {
+		for (int i = 0; i < n; i++) {
+			file >> input;
 			originalNumbers.push_back(input);
 		}
+
+		file.close();
 
 		// for loop that runs 5 times, for each sorting alogrithm
 		for (int y = 0; y < 5; y++) {
@@ -222,12 +224,12 @@ int main() {
 			}
 
 			// set of if statements that decide which algorithm to run based on y's value
-			if (y == 0) {
+			if (y == 3) {
 				// starts and clock, calls the sorting algorithm, and ends the clock
 				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				selectionSort(numbersToSort, n);
 				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-				
+
 				// outputs the time it took to sort the numbers
 				cout << "N = " << n << ", Selection Sort: ";
 				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
@@ -238,7 +240,7 @@ int main() {
 				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				bubbleSort(numbersToSort, n);
 				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-				
+
 				cout << "N = " << n << ", Bubble Sort: ";
 				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
 			}
@@ -252,7 +254,7 @@ int main() {
 				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
 			}
 
-			else if (y == 3) {
+			else if (y == 0) {
 				chrono::high_resolution_clock::time_point begin = chrono::high_resolution_clock::now();
 				quickSort(numbersToSort);
 				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
@@ -269,7 +271,7 @@ int main() {
 				cout << "N = " << n << ", Insertion Sort: ";
 				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n\n";
 			}
-			
+
 			// clears the numbers in numberToSort so the next sorting algorithm will sort the unsorted numbers
 			numbersToSort.clear();
 		}

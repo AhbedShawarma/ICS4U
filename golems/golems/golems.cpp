@@ -11,31 +11,44 @@ Description: The program prompts the user to play a game that involves the user 
 
 #include "pch.h"
 #include <iostream> // for console input and output
-#include <ctime> // for srand which generates random numbers every run of the program
-#include <string> // to work with strings
-#include <windows.h> // windows api header
-#include <algorithm> // for find function
-
+#include <ctime>	// for srand which generates random numbers every run of the program
+#include <string>	// to work with strings
+#include <windows.h>// windows api header
+#include <algorithm>// for find function
+#include <stdlib.h>	// for clearing the screen
 
 using namespace std;
 
-void instructionsDisplayer(string input, HANDLE colour) {
+string colourChanger(int colour = 7, string text = "") {
+	//pre:	take in an integer for the colour and a string (it does not need to take in parameters as it will use the default parameters to change the colour to gray)
+	//post:	changes the colour of the console output and returns text
+
+	// changes the colour of the console output based on the number the user entered
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
+	
+	return text;
+}
+
+void instructionsDisplayer(string input) {
 	//pre:	takes in user input to check if they want instructions
 	//post:	if user input equals "I", outputs instructions
-	SetConsoleTextAttribute(colour, 4);
 
 	if (input == "I") {
-		cout << "\nINSTRUCTIONS: \n"
-			<< "You must find the correct order to use four spells to stop the golems. These spells are \n" 
+		cout << colourChanger(5, "\n--------------------------------- INSTRUCTIONS ----------------------------------------   \n");
+		colourChanger();
+		cout << "You must find the correct order to use four spells to stop the golems. These spells are \n"
 			<< "based on the 4 elements, Fire, Water, Air, and Earth. The order only consists of the 4 \n"
 			<< "elemental spells but there could be duplicates so not all 4 must be present in the \n"
-			<< "correct order. Fortunately, the golems have eyes that will glow in a way that will give \n" 
-			<< "you some clues. Their eyes will glow RED for each element that is in the correct \n" 
-			<< "location.Their eyes will glow BLUE for each element that is correctly included, but in \n" 
-			<< "the wrong location. You will enter your guess which will consist of 4 letters, F for \n" 
-			<< "fire, W for water, A for air, and E for earth and you will recieve a hint consisting \n" 
-			<< "of Rs and Bs. \n\n\n";
+			<< "correct order. Fortunately, the golems have eyes that will glow in a way that will give \n"
+			<< "you some clues. Their eyes will glow RED for each element that is in the correct \n"
+			<< "location.Their eyes will glow BLUE for each element that is correctly included, but in \n"
+			<< "the wrong location. You will enter your guess which will consist of 4 letters, F for \n"
+			<< "fire, W for water, A for air, and E for earth and you will recieve a hint consisting \n"
+			<< "of Rs and Bs.\n";
+		cout << colourChanger(5, "--------------------------------------------------------------------------------------- \n\n");
+		colourChanger();
 	}
+
 }
 
 void toUpperCase(string &str) {
@@ -133,7 +146,7 @@ string passwordCreator() {
 	return element;
 }
 
-void secretHintMaker(string password, string guess, HANDLE consoleColour) {
+void secretHintMaker(string password, string guess) {
 	//pre:	the function takes in the password and a valid user guess
 	//post: the function outputs if the selected element is either in the correct location, present in the password but not in the correct locatio, or if it is not present in the password
 
@@ -151,7 +164,7 @@ void secretHintMaker(string password, string guess, HANDLE consoleColour) {
 	// a do while loop that keeps letting the user input and only exits when the user enters a valid input
 	while (!(inputChecker(1, hintInput, hintLetter))) {
 		// calls on instructionsDisplayer to output instructions if the user wanted them
-		instructionsDisplayer(hintLetter, consoleColour);
+		instructionsDisplayer(hintLetter);
 		if (hintLetter != "I") {
 			cout << "INVALID ENTRY!" << endl;
 		}
@@ -179,10 +192,6 @@ void secretHintMaker(string password, string guess, HANDLE consoleColour) {
 
 int main()
 {
-	// enables changing the colour for console output
-	HANDLE hConsole;
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
 	// makes sure there is a random seed everytime the program is run so the password is truly random
 	srand(time(0));
 
@@ -213,33 +222,39 @@ int main()
 		string password = passwordCreator() + passwordCreator() + passwordCreator() + passwordCreator();
 
 		// asks the user if they want instructions and capitalizes input
-		cout << "Enter \"I\" for instructions (you can enter \"I\" at any time to receive instructions: ";
+		cout << "Enter \"I\" for instructions (you can enter \"I\" at any time to receive instructions): ";
 		cin >> instructions;
 		toUpperCase(instructions);
+
 		// calls on instructionsDisplayer to output instructions if the user wanted them
-		instructionsDisplayer(instructions, hConsole);
+		instructionsDisplayer(instructions);
 
-		// difficulty descriptions, prompts the user to enter their preferred difficulty
-		cout << "Choose your difficulty \n"
-			<< "E - Easy: \n"
-			<< "Each hint tells you which letters in your guess are in the correct place, correctly included,\n"
-			<< "or if they are not in the hint by outputting X. You get 10 tries to guess the password. \n"
-			<< "M - Medium: \n"
-			<< "Each hint tells you if any letters are in the correct place or correctly included. \n"
-			<< "You get 10 tries to guess the password (plus you might get a bonus hint). \n"
-			<< "H - Hard: \n"
-			<< "Each hint tells you if any letters are in the correct place or correctly included. \n"
-			<< "You get 5 tries to guess the password."
-			<< endl;
+		// displays the difficulty options
+		cout << colourChanger(11, "\n------------------------ CHOOSE A DIFFICULTY ------------------------------   \n");
+		cout << colourChanger(2, "E - EASY"); 
+		cout << colourChanger(7, "\t\t| ");
+		cout << colourChanger(14, "M - MEDIUM");
+		cout << colourChanger(7, "\t\t| ");
+		cout << colourChanger(12, "H - HARD \n");
+		colourChanger();
+		cout << "Each hint indicates the"	<< "\t| Each hint indicates"		<< "\t| Each hint indicates if\n"
+			<< "letters in your guess"		<< "\t| if any letters in the"		<< "\t| any letter in the guess\n"
+			<< "that are in the correct"	<< "\t| guess are in the"			<< "\t| are in the correct\n"
+			<< "place, in the password,"	<< "\t| correct place or "			<< "\t| place or correctly\n"
+			<< "or not in the password"		<< "\t| correctly included."		<< "\t| included. You get 10\n"
+			<< "(indicated by an 'X)."		<< "\t| You get 10 tries to"		<< "\t| tries to guess the\n"
+			<< "You get 10 tries to"		<< "\t| guess the password"			<< "\t| password.\n"
+			<< "guess the password"			<< "\t| and a special hint."		<< "\t| \n\n";
 
-		// stores the user input in a variable and makes it all uppercase
+		// promts user to input stores the user input in a variable and makes it all uppercase
+		cout << "Choose your difficulty (Enter E, M, or H): ";
 		cin >> difficulty;
 		toUpperCase(difficulty);
 
 		// a while loop that checks if the user input is valid and keeps prompting the user to enter until they enter a valid response
 		while (!(inputChecker(1, validDifficultyInput, difficulty))) {
 			// calls on instructionsDisplayer to output instructions if the user wanted them
-			instructionsDisplayer(difficulty, hConsole);
+			instructionsDisplayer(difficulty);
 			if (difficulty != "I") {
 				cout << "INVALID ENTRY!" << endl;
 			}
@@ -256,9 +271,13 @@ int main()
 			numOfGuesses = 10;
 		}
 
+		// clear the page
+		system("CLS");
+
+		// output the difficulty and total number of guesses that the user gets at the top
+		cout << "DIFFICULTY: " << difficulty << ", TOTAL NUMBER OF GUESSES: " << numOfGuesses << endl;
 		// a while loop that keeps looping until the user it out of guesses or it will exit early if the user guesses the correctly
 		while (numOfGuesses--) {
-
 			// prompts the user to enter their guess and stores it with all charactes being uppercase
 			cout << "Enter the password: ";
 			cin >> userGuess;
@@ -267,11 +286,11 @@ int main()
 			// a while loop that checks if the user input is valid and keeps prompting the user to enter until they enter a valid response
 			while (!(inputChecker(4, validPasswordInput, userGuess))) {
 				// calls on instructionsDisplayer to output instructions if the user wanted them
-				instructionsDisplayer(userGuess, hConsole);
+				instructionsDisplayer(userGuess);
 				if (userGuess != "I") {
 					cout << "INVALID ENTRY!" << endl;
+					cout << "The password is 4 letters long, using only the characters F, W, A, and E." << endl;
 				}
-				cout << "The password is 4 letters long, using only the characters F, W, A, and E." << endl;
 				cout << "Enter the password: ";
 				cin >> userGuess;
 				toUpperCase(userGuess);
@@ -279,25 +298,33 @@ int main()
 
 			// calls hintMaker to create the hint and stores it as a variable
 			hint = hintMaker(password, userGuess, difficulty);
+			
+			// if either R or B is found in the hint, then output the hint
+			if ((hint.find('R') != std::string::npos) || (hint.find('B') != std::string::npos)) {
 
-			// a for loop that loops for every character in the hint and changes the colour of the output according to the letter, red for 'R', blue for 'B' and grey for 'X'
-			for (int x = 0; x < hint.length(); x++) {
-				if (hint[x] == 'R') {
-					SetConsoleTextAttribute(hConsole, 4);
-					cout << hint[x];
+				// a for loop that loops for every character in the hint and changes the colour of the output according to the letter, red for 'R', blue for 'B' and grey for 'X'
+				for (int x = 0; x < hint.length(); x++) {
+					if (hint[x] == 'R') {
+						colourChanger(4);
+						cout << hint[x];
+					}
+					else if (hint[x] == 'B') {
+						colourChanger(9);
+						cout << hint[x];
+					}
+					else {
+						colourChanger();
+						cout << hint[x];
+					}
 				}
-				else if (hint[x] == 'B') {
-					SetConsoleTextAttribute(hConsole, 9);
-					cout << hint[x];
-				}
-				else {
-					SetConsoleTextAttribute(hConsole, 7);
-					cout << hint[x];
-				}
+			}
+			// else output that there were no elements in the guess that are in the password
+			else {
+				cout << "No elements in your guess are present in the password.";
 			}
 
 			// sets the output colour back to grey
-			SetConsoleTextAttribute(hConsole, 7);
+			colourChanger();
 			cout << "\n";
 
 			// if the user guessed correctly, so the hint is "RRRR", a "you win" message is outputted and the looping ends
@@ -310,7 +337,7 @@ int main()
 			// if the user is on their fith guess and have chosen medium difficulty, the user is prompted with a secret hint
 			if (numOfGuesses == 5 && difficulty == "M") {
 				cout << "Psst, hey there, you only have 5 guesses remaining, I'll give you a bonus hint about the password based on the elements you just guessed." << endl;
-				secretHintMaker(password, userGuess, hConsole);
+				secretHintMaker(password, userGuess);
 			}
 		}
 
@@ -332,6 +359,9 @@ int main()
 			cin >> playAgain;
 			toUpperCase(playAgain);
 		}
+
+		// clears screen
+		system("CLS");
 
 	} while (playAgain == "Y");
 
