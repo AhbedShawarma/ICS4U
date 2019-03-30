@@ -1,0 +1,7 @@
+﻿  class practice.cpp
+c:\users\qazth\documents\school work\comp sci\class practice\class practice\class practice.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Hero.cpp
+  Sword.cpp
+c:\users\qazth\documents\school work\comp sci\class practice\class practice\sword.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
+  class practice.vcxproj -> C:\Users\qazth\Documents\School Work\comp sci\class practice\Debug\class practice.exe
