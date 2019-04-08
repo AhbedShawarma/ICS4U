@@ -6,13 +6,13 @@ Description: The program reads in files that include n numbers, sorts the number
 
 #include "pch.h"
 #include <ctime>	// for timing the results
-#include <iostream> // for cout
-#include <stdio.h>  // c style output "printf"
+#include <iostream>	// for cout
+#include <stdio.h>	// c style output "printf"
 #include <fstream>	// for reading in files
 #include <string>	// to use strings
 #include <vector>	// to use vectors
-#include <chrono>
-#include <ratio>
+#include <chrono>	// for a high resolution clock
+
 using namespace std;
 
 void selectionSort(vector<int>& sortingNumbers, int size) {
@@ -28,7 +28,7 @@ void selectionSort(vector<int>& sortingNumbers, int size) {
 	for (j = 0; j < size - 1; j++) {
 		// set smallesst number to the current element, j
 		iMin = j;
-		// for loop that iterates through the rest of the numbers to check if j is the smallest number
+		// for loop that iterates through the rest of the numbers to check if iMin is the smallest number
 		for (i = j + 1; i < size; i++) {
 			// if i is less than the current lowest number, set i to the lowest number
 			if (sortingNumbers[i] < sortingNumbers[iMin]) {
@@ -194,11 +194,12 @@ void insertionSort(vector<int>& sortingNumbers, int size) {
 
 
 int main() {
+	// set the number of elements to sort to 1;
 	int n = 1;
 
 	// while loop that will read and sort files with numbers up to n = 100000
 	while (n < 100000) {
-		// set the number of integers in the file 10 times greater than the previous
+		// set the number of integers to use in the file 10 times greater than the previous
 		n *= 10;
 		// create vectors to store the numbers in the file, originalNumbers will always store the unsorted numbers
 		vector<int> originalNumbers;
@@ -212,7 +213,7 @@ int main() {
 			file >> input;
 			originalNumbers.push_back(input);
 		}
-
+		// close the file
 		file.close();
 
 		// for loop that runs 5 times, for each sorting alogrithm
@@ -230,7 +231,7 @@ int main() {
 				selectionSort(numbersToSort, n);
 				chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 
-				// outputs the time it took to sort the numbers
+				// outputs the time it took to sort the numbers (divides by 1000000000 to get the output in seconds)
 				cout << "N = " << n << ", Selection Sort: ";
 				cout << "Elapsed time is " << double((end - begin).count()) / double(1000000000) << " seconds.\n";
 

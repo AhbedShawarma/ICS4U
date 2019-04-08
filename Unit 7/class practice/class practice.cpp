@@ -12,8 +12,16 @@ int main()
 {
 	srand(time(NULL));
 
-	Hero myHero("Cohan");
-	myHero.swing();
+	Hero bob("Bob");
+	Sword ex("Excalibur", 0, 5);
+	Sword exV2("Excalibur V2", 100, 200);
+
+	bob.swing();
+	bob.equip(ex);
+	bob.swing();
+	bob.swing();
+	bob.equip(exV2);
+	bob.swing();
 
 	return 0;
 }

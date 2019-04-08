@@ -1,7 +1,9 @@
-﻿  class practice.cpp
-c:\users\qazth\documents\school work\comp sci\class practice\class practice\class practice.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  pch.cpp
+  class practice.cpp
+c:\users\qazth\documents\github\ics4u\unit 7\class practice\class practice.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Hero.cpp
   Sword.cpp
-c:\users\qazth\documents\school work\comp sci\class practice\class practice\sword.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\qazth\documents\github\ics4u\unit 7\class practice\sword.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Generating Code...
-  class practice.vcxproj -> C:\Users\qazth\Documents\School Work\comp sci\class practice\Debug\class practice.exe
+  LINK : C:\Users\qazth\Documents\GitHub\ICS4U\Unit 7\Debug\class practice.exe not found or not built by the last incremental link; performing full link
+  class practice.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\Unit 7\Debug\class practice.exe

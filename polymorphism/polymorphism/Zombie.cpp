@@ -1,43 +1,24 @@
 #include "Zombie.h"
 #include <string>
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
-Zombie::Zombie(std::string name, std::string species) : Human(name, species)
+Zombie::Zombie(std::string name, std::string species) : Human(name, species, 40, 20, 30)
 {
-	happiness = 50;
-	easeOfAnger = 20;
-	strength = 30;
-	isThreatened = false;
 }
 
 void Zombie::speak() {
-	std::cout << "grlglglllr (brains)\n";
-}
-
-void Zombie::payTaxes() { // if i put it under citizen, does it update variables?
-
-	if (happiness < 1) {
-		attack();
+	if (happiness > 0) {
+		std::cout << "grrlg...brains...\n";
 	}
 	else {
-		if ((rand() % happiness + 1) > 10 || isThreatened == true) {
-			std::cout << name << " paid their taxes.\n";
-			happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
-		}
-		else {
-			if ((rand() % (100 - happiness) + 1) < 50) {
-				attack();
-			}
-			else {
-				std::cout << name << " refused to pay their taxes.\n";
-			}
-		}
+		std::cout << "YOU HAVE ANGERED ME! FULFIL MY REQUEST OR ELSE I WILL NEVER PAY TAXES!\n";
 	}
-
 }
 
 void Zombie::thank() {
-	std::cout << "grga larga lerg (I will not eat you)\n";
+	std::cout << "glrga...I will not eat you...\n";
 	happiness += 20;
 }
 
@@ -50,6 +31,20 @@ bool Zombie::attack() {
 	}
 	else {
 		return false;
+	}
+}
+
+void Zombie::action() {
+	std::cout << "YOU MUST BRING ME A BRAIN OF A CITIZEN!\n Enter the species of the citizen you would like to kill to get their brain:\n";
+	std::cin >> citizenToKill;
+	while (true) {
+		//for (int i = 0; i < citizens.size(); i++) {
+			//if ((citizenToKill == citizens[i]->getSpecies()) && citizenToKill != getSpecies()) {
+			//if (std::stoi(citizenToKill) )
+		break;
+			//}
+		//}
+		std::cout << "ENTER A VALID CITIZEN SPECIES!\n";
 	}
 }
 

@@ -2,38 +2,12 @@
 #include <string>
 #include <iostream>
 
-Nobbs::Nobbs(std::string name, std::string species) : Human(name, species)
+Nobbs::Nobbs(std::string name, std::string species) : Human(name, species, 70, 10, 20)
 {
-	happiness = 50;
-	easeOfAnger = 20;
-	strength = 30;
-	isThreatened = false;
 }
 
 void Nobbs::speak() {
 	std::cout << "grlglglllr (brains)\n";
-}
-
-void Nobbs::payTaxes() { // if i put it under citizen, does it update variables? does Citizen::payTaxes work?
-
-	if (happiness < 1) {
-		attack();
-	}
-	else {
-		if ((rand() % happiness + 1) > 10 || isThreatened == true) {
-			std::cout << name << " paid their taxes.\n";
-			happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
-		}
-		else {
-			if ((rand() % (100 - happiness) + 1) < 50) {
-				attack();
-			}
-			else {
-				std::cout << name << " refused to pay their taxes.\n";
-			}
-		}
-	}
-
 }
 
 void Nobbs::thank() {

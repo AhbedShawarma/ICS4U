@@ -4,12 +4,14 @@
 
 class Zombie : public Human
 {
+private:
+	std::string citizenToKill;
 public:
 	Zombie(std::string name, std::string species);
 	void speak();
 	void thank();
-	void payTaxes();
 	bool attack();
+	void action();
 	~Zombie();
 };
 

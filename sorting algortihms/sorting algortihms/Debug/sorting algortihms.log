@@ -1,1 +1,4 @@
-﻿
+﻿  pch.cpp
+  sorting algortihms.cpp
+c:\users\qazth\documents\github\ics4u\sorting algortihms\sorting algortihms\sorting algortihms.cpp(104): warning C4018: '<': signed/unsigned mismatch
+  sorting algortihms.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\sorting algortihms\Debug\sorting algortihms.exe
