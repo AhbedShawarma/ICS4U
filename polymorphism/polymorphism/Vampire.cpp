@@ -2,38 +2,12 @@
 #include <string>
 #include <iostream>
 
-Vampire::Vampire(std::string name, std::string species) : Human(name, species)
+Vampire::Vampire(std::string name, std::string species) : Human(name, species, 30, 30, 50)
 {
-	happiness = 50;
-	easeOfAnger = 20;
-	strength = 30;
-	isThreatened = false;
 }
 
 void Vampire::speak() {
 	std::cout << "grlglglllr (brains)\n";
-}
-
-void Vampire::payTaxes() { // if i put it under citizen, does it update variables? does Citizen::payTaxes work?
-
-	if (happiness < 1) {
-		attack();
-	}
-	else {
-		if ((rand() % happiness + 1) > 10 || isThreatened == true) {
-			std::cout << name << " paid their taxes.\n";
-			happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
-		}
-		else {
-			if ((rand() % (100 - happiness) + 1) < 50) {
-				attack();
-			}
-			else {
-				std::cout << name << " refused to pay their taxes.\n";
-			}
-		}
-	}
-
 }
 
 void Vampire::thank() {

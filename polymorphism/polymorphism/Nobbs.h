@@ -8,7 +8,6 @@ public:
 	Nobbs(std::string name, std::string species);
 	void speak();
 	void thank();
-	void payTaxes();
 	bool attack();
 	~Nobbs();
 };
