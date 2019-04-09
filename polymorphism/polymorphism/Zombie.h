@@ -5,12 +5,11 @@
 class Zombie : public Human
 {
 private:
-	std::string citizenToKill;
+	char citizenToKill;
 public:
 	Zombie(std::string name, std::string species);
 	void speak();
 	void thank();
-	bool attack();
 	void action();
 	~Zombie();
 };

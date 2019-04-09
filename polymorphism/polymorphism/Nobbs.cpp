@@ -15,19 +15,7 @@ void Nobbs::thank() {
 	happiness += 20;
 }
 
-bool Nobbs::attack() {
-	std::cout << name << " attacked out of anger!\n";
-
-	if ((rand() % strength + 1) > 20) {
-		std::cout << name << " has killed the wolf!\n";
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 Nobbs::~Nobbs()
 {
-	std::cout << name << "has been killed by the wolf!\n";
+	std::cout << name << "has been killed!\n";
 }

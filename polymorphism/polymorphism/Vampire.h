@@ -8,7 +8,7 @@ public:
 	Vampire(std::string name, std::string species);
 	void speak();
 	void thank();
-	bool attack();
+	void action();
 	~Vampire();
 };
 

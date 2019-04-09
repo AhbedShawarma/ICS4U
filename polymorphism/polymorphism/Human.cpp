@@ -4,33 +4,27 @@
 
 Human::Human(std::string name, std::string species, int happiness, int easeOfAnger, int strength) : Citizen(name, species, happiness, easeOfAnger, strength)
 {
-	isThreatened = false;
-
+	currency = "dollars";
 }
 
 void Human::speak() {
-	std::cout << "Sup dude.\n";
+	if (happiness > easeOfAnger) {
+		std::cout << "Sup dude.\n";
+	}
+	else {
+		std::cout << "You ain't being to nice man, I'm upset! I'll stop paying taxes unless you do something that makes me like you.\n";
+	}
 }
 
 void Human::thank() {
-	std::cout << "grga larga lerg (I will not eat you)\n";
+	std::cout << "You a real brotha!\n";
 	happiness += 20;
 }
 
-bool Human::attack() {
-	std::cout << name << " attacked out of anger!\n";
-
-	if ((rand() % strength + 1) > 20) {
-		std::cout << name << " has killed the wolf!\n";
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 void Human::action() {
+	std::cout << "So hear me out, if you  \n";
 
+	happiness += 100 - easeOfAnger;
 }
 
 Human::~Human()

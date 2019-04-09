@@ -2,32 +2,40 @@
 #include <string>
 #include <iostream>
 
-Vampire::Vampire(std::string name, std::string species) : Human(name, species, 30, 30, 50)
+Vampire::Vampire(std::string name, std::string species) : Human(name, species, 50, 30, 60)
 {
 }
 
 void Vampire::speak() {
-	std::cout << "grlglglllr (brains)\n";
+	if (happiness > easeOfAnger) {
+		std::cout << "Greetings mortal.\n";
+
+	}
+	else {
+		std::cout << "I have had it with you, if you want me to pay taxes, you must do me a favour.\n";
+	}
 }
 
 void Vampire::thank() {
-	std::cout << "grga larga lerg (I will not eat you)\n";
+	std::cout << "How kind of you.\n";
 	happiness += 20;
 }
 
-bool Vampire::attack() {
-	std::cout << name << " attacked out of anger!\n";
-
-	if ((rand() % strength + 1) > 20) {
-		std::cout << name << " has killed the wolf!\n";
-		return true;
+void Vampire::action() {
+	std::cout << "Ha! Now that you have agreed you cannot say no. You must give me a sample of your wolf's blood,\n"
+		<< "don't worry, theres only a 20% chance that your wolf lives.\n";
+	if ((rand() % 10 + 1) > 2) {
+		std::cout << "Pity, the wolf died in the process.\n";
+		wolves.erase(wolves.begin());
 	}
 	else {
-		return false;
+		std::cout << "This wolf must be blessed, it survived.\n";
 	}
+
+	happiness += 100 - easeOfAnger;
 }
 
 Vampire::~Vampire()
 {
-	std::cout << name << "has been killed by the wolf!\n";
+	std::cout << name << "has been killed!\n";
 }

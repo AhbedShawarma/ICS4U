@@ -9,7 +9,7 @@ Zombie::Zombie(std::string name, std::string species) : Human(name, species, 40,
 }
 
 void Zombie::speak() {
-	if (happiness > 0) {
+	if (happiness > easeOfAnger) {
 		std::cout << "grrlg...brains...\n";
 	}
 	else {
@@ -22,33 +22,30 @@ void Zombie::thank() {
 	happiness += 20;
 }
 
-bool Zombie::attack() {
-	std::cout << name << " attacked out of anger!\n";
-
-	if ((rand() % strength + 1) > 20) {
-		std::cout << name << " has killed the wolf!\n";
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 void Zombie::action() {
-	std::cout << "YOU MUST BRING ME A BRAIN OF A CITIZEN!\n Enter the species of the citizen you would like to kill to get their brain:\n";
+	std::cout << "YOU MUST BRING ME A BRAIN OF A CITIZEN!\nEnter the species of the citizen you would like to kill to get their brain:\n";
 	std::cin >> citizenToKill;
+	int i;
 	while (true) {
-		//for (int i = 0; i < citizens.size(); i++) {
-			//if ((citizenToKill == citizens[i]->getSpecies()) && citizenToKill != getSpecies()) {
-			//if (std::stoi(citizenToKill) )
-		break;
-			//}
-		//}
-		std::cout << "ENTER A VALID CITIZEN SPECIES!\n";
+		i = 0;
+		for (i; i < citizens.size(); i++) {
+			if ((citizenToKill == (citizens[i]->getSpecies())[0]) && (citizenToKill != getSpecies()[0])) {
+				break;
+			}
+		}
+		if (i != citizens.size()) {
+			citizens[i]->attack();
+			//citizens.erase(citizens.begin() + i);
+			break;
+		}
+		std::cout << "ENTER A VALID CITIZEN SPECIES!\n"
+			<< "(h - human, t - troll, d - dwarf, w - werewolf, n - Nobbs, v - vampire)\n";
+		std::cin >> citizenToKill;
 	}
+	happiness += 100 - easeOfAnger;
 }
 
 Zombie::~Zombie()
 {
-	std::cout << name << "has been killed by the wolf!\n";
+	std::cout << name << "has been killed!\n";
 }

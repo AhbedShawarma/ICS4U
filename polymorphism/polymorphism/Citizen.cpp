@@ -10,6 +10,7 @@ Citizen::Citizen(std::string name, std::string species, int happiness, int easeO
 }
 
 std::vector<Citizen*> Citizen::citizens;
+std::vector<Wolf*> Citizen::wolves;
 
 std::string Citizen::getName() {
 	return name;
@@ -21,24 +22,34 @@ std::string Citizen::getSpecies() {
 
 void Citizen::payTaxes() {
 
-	if (happiness < 1) {
-		attack();
-	}
-	else {
-		if ((rand() % happiness + 1) > 10 || isThreatened == true) {
-			std::cout << name << " paid their taxes.\n";
-			happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
-		}
-		else {
-			if ((rand() % (100 - happiness) + 1) < 50) {
-				attack();
-			}
-			else {
-				std::cout << name << " refused to pay their taxes.\n";
-			}
-		}
+	if ((rand() % happiness + 1) > 10 || isThreatened == true) {
+		std::cout << name << " paid their taxes in " << currency << ".\n";
+		happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
 	}
 
+	else {
+		if ((rand() % (100 - happiness) + 1) < 50) {
+			attack();
+		}
+		else {
+			std::cout << name << " refused to pay their taxes.\n";
+		}
+	}
+}
+
+void Citizen::attack() {
+	std::cout << name << " attacked out of anger!\n";
+
+	if ((rand() % strength + 1) > 20) {
+		std::cout << name << " has killed the wolf!\n";
+		wolves.erase(wolves.begin());
+		//return true;
+	}
+	else {
+		std::cout << name << " has been killed by the wolf!\n";
+
+		//return false;
+	}
 }
 
 Citizen::~Citizen()

@@ -1,9 +1,5 @@
 ﻿  Citizen.cpp
-  Human.cpp
-  Nobbs.cpp
-  Vampire.cpp
-  Zombie.cpp
   polymorphism.cpp
-C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\polymorphism.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\polymorphism.cpp(13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating Code...
-  polymorphism.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\Debug\polymorphism.exe
+  polymorphism.vcxproj -> C:\Users\qazth\Downloads\ICS4U\polymorphism\Debug\polymorphism.exe
