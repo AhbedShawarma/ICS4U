@@ -152,17 +152,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Citizen.cpp" />
+    <ClCompile Include="Dwarf.cpp" />
     <ClCompile Include="Human.cpp" />
     <ClCompile Include="Nobbs.cpp" />
     <ClCompile Include="polymorphism.cpp" />
+    <ClCompile Include="Troll.cpp" />
     <ClCompile Include="Vampire.cpp" />
     <ClCompile Include="Wolf.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Citizen.h" />
+    <ClInclude Include="Dwarf.h" />
     <ClInclude Include="Human.h" />
     <ClInclude Include="Nobbs.h" />
+    <ClInclude Include="Troll.h" />
     <ClInclude Include="Vampire.h" />
     <ClInclude Include="Wolf.h" />
     <ClInclude Include="Zombie.h" />

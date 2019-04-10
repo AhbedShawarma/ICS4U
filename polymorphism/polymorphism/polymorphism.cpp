@@ -5,6 +5,8 @@
 #include "Nobbs.h"
 #include "Vampire.h"
 #include <time.h>
+#include <Windows.h>
+#include <conio.h>
 
 using namespace std;
 
@@ -14,11 +16,7 @@ int main()
 	Citizen::citizens.push_back(new Human("bob", "human"));
 	Citizen::citizens.push_back(new Zombie("z", "zombie"));
 	Citizen::citizens.push_back(new Vampire("v", "vampire"));
-
-
-
-	//out << Citizen::citizens[0]->isThreatened << Citizen::citizens[0]->willPayTaxes;
-	Citizen::citizens[1]->speak();
+-
 
 
 	return 0;

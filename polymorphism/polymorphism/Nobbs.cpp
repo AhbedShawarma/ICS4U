@@ -15,6 +15,10 @@ void Nobbs::thank() {
 	happiness += 20;
 }
 
+void Nobbs::action() {
+
+}
+
 Nobbs::~Nobbs()
 {
 	std::cout << name << "has been killed!\n";

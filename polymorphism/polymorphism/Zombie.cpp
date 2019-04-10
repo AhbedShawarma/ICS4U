@@ -13,6 +13,7 @@ void Zombie::speak() {
 		std::cout << "grrlg...brains...\n";
 	}
 	else {
+		willPayTaxes = false;
 		std::cout << "YOU HAVE ANGERED ME! FULFIL MY REQUEST OR ELSE I WILL NEVER PAY TAXES!\n";
 	}
 }
@@ -24,6 +25,7 @@ void Zombie::thank() {
 
 void Zombie::action() {
 	std::cout << "YOU MUST BRING ME A BRAIN OF A CITIZEN!\nEnter the species of the citizen you would like to kill to get their brain:\n";
+	char citizenToKill;
 	std::cin >> citizenToKill;
 	int i;
 	while (true) {
@@ -42,6 +44,7 @@ void Zombie::action() {
 			<< "(h - human, t - troll, d - dwarf, w - werewolf, n - Nobbs, v - vampire)\n";
 		std::cin >> citizenToKill;
 	}
+	willPayTaxes = true;
 	happiness += 100 - easeOfAnger;
 }
 

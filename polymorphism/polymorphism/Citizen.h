@@ -17,8 +17,8 @@ public:
 	Citizen(std::string name, std::string species, int happiness, int easeOfAnger, int strength);
 	bool isThreatened = false;
 	bool willPayTaxes = true;
-	bool isWolf1Alive = true;
-	bool isWolf2Alive = true;
+	//bool isWolf1Alive = true;
+	//bool isWolf2Alive = true;
 	std::string getName();
 	std::string getSpecies();
 	void payTaxes();

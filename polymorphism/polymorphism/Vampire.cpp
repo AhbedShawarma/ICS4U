@@ -12,6 +12,7 @@ void Vampire::speak() {
 
 	}
 	else {
+		willPayTaxes = false;
 		std::cout << "I have had it with you, if you want me to pay taxes, you must do me a favour.\n";
 	}
 }
@@ -32,6 +33,7 @@ void Vampire::action() {
 		std::cout << "This wolf must be blessed, it survived.\n";
 	}
 
+	willPayTaxes = true;
 	happiness += 100 - easeOfAnger;
 }
 
