@@ -16,7 +16,6 @@ int main()
 	Citizen::citizens.push_back(new Human("bob", "human"));
 	Citizen::citizens.push_back(new Zombie("z", "zombie"));
 	Citizen::citizens.push_back(new Vampire("v", "vampire"));
--
 
 
 	return 0;

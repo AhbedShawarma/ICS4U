@@ -7,16 +7,15 @@ Nobbs::Nobbs(std::string name, std::string species) : Human(name, species, 70, 1
 }
 
 void Nobbs::speak() {
-	std::cout << "grlglglllr (brains)\n";
+	std::cout << "\n";
 }
 
 void Nobbs::thank() {
-	std::cout << "grga larga lerg (I will not eat you)\n";
+	std::cout << "\n";
 	happiness += 20;
 }
-
 void Nobbs::action() {
-
+	std::cout << "You have to give me taxes of 2 citizens\n";
 }
 
 Nobbs::~Nobbs()
