@@ -11,6 +11,7 @@ Citizen::Citizen(std::string name, std::string species, int happiness, int easeO
 
 std::vector<Citizen*> Citizen::citizens;
 std::vector<Wolf*> Citizen::wolves;
+int Citizen::numOfTaxesCollected = 0;
 
 std::string Citizen::getName() {
 	return name;
@@ -26,6 +27,8 @@ void Citizen::payTaxes() {
 		if ((rand() % happiness + 1) > 10 || isThreatened == true) {
 			std::cout << name << " paid their taxes in " << currency << ".\n";
 			happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
+			numOfTaxesPayed++;
+			numOfTaxesCollected++;
 		}
 
 		else {

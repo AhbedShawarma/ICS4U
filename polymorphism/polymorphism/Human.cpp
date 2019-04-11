@@ -11,23 +11,23 @@ Human::Human(std::string name, std::string species, int happiness, int easeOfAng
 
 void Human::speak() {
 	if (happiness > easeOfAnger) {
-		std::cout << "Sup dude.\n";
+		std::cout << name << ": Sup dude.\n";
 	}
 	else {
 		willPayTaxes = false;
-		std::cout << "You ain't being to nice man, I'm upset! I'll stop paying taxes unless you beat me in a duel.\n";
+		std::cout << name << ": You ain't being to nice man, I'm upset! I'll stop paying taxes unless you beat me in a duel.\n";
 	}
 }
 
 void Human::thank() {
-	std::cout << "You a real brotha!\n";
+	std::cout << name << ": You a real brotha!\n";
 	happiness += 20;
 }
 
 void Human::action() {
-	std::cout << "Get ready! I'll only pay taxes if you beat me.\n";
+	std::cout << name << ": Get ready! I'll only pay taxes if you beat me.\n";
 	std::cout << "PRESS W to attack, A to dodge left, D to dodge right.\n";
-	bool humanWin;
+	bool humanWin = false;
 	int chanceOfKilling = 1;
 	for (int chanceOfWinning = 5; chanceOfWinning > 0; chanceOfWinning--, chanceOfKilling++) {
 		int move = rand() % 3 + 1;

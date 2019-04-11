@@ -10,21 +10,21 @@ Zombie::Zombie(std::string name, std::string species) : Human(name, species, 40,
 
 void Zombie::speak() {
 	if (happiness > easeOfAnger) {
-		std::cout << "grrlg...brains...\n";
+		std::cout << name << ": grrlg...brains...\n";
 	}
 	else {
 		willPayTaxes = false;
-		std::cout << "YOU HAVE ANGERED ME! FULFIL MY REQUEST OR ELSE I WILL NEVER PAY TAXES!\n";
+		std::cout << name << ": YOU HAVE ANGERED ME! FULFIL MY REQUEST OR ELSE I WILL NEVER PAY TAXES!\n";
 	}
 }
 
 void Zombie::thank() {
-	std::cout << "glrga...I will not eat you...\n";
+	std::cout << name << ": glrga...I will not eat you...\n";
 	happiness += 20;
 }
 
 void Zombie::action() {
-	std::cout << "YOU MUST BRING ME A BRAIN OF A CITIZEN!\nEnter the species of the citizen you would like to kill to get their brain:\n";
+	std::cout << name << ": YOU MUST BRING ME A BRAIN OF A CITIZEN!\nEnter the species of the citizen you would like to kill to get their brain:\n";
 	char citizenToKill;
 	std::cin >> citizenToKill;
 	int i;

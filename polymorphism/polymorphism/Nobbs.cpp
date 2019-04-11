@@ -7,15 +7,26 @@ Nobbs::Nobbs(std::string name, std::string species) : Human(name, species, 70, 1
 }
 
 void Nobbs::speak() {
-	std::cout << "\n";
+	if (happiness > easeOfAnger) {
+		std::cout << name << ": Hello there.\n";
+	}
+	else {
+		std::cout << name << ": You have made me angery! I will stop paying taxes unless you give me something.\n";
+		willPayTaxes = false;
+	}
 }
 
 void Nobbs::thank() {
-	std::cout << "\n";
+	std::cout << name << ": You're up to something if you don't need me to pay taxes this month.\n";
 	happiness += 20;
 }
+
 void Nobbs::action() {
-	std::cout << "You have to give me taxes of 2 citizens\n";
+	std::cout << name << ": You must give back all of the tax I have paid.\n";
+	numOfTaxesCollected -= numOfTaxesPayed;
+	willPayTaxes = true;
+	happiness += 100 - easeOfAnger;
+
 }
 
 Nobbs::~Nobbs()

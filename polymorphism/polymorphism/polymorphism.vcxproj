@@ -158,6 +158,7 @@
     <ClCompile Include="polymorphism.cpp" />
     <ClCompile Include="Troll.cpp" />
     <ClCompile Include="Vampire.cpp" />
+    <ClCompile Include="Werewolf.cpp" />
     <ClCompile Include="Wolf.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="Nobbs.h" />
     <ClInclude Include="Troll.h" />
     <ClInclude Include="Vampire.h" />
+    <ClInclude Include="Werewolf.h" />
     <ClInclude Include="Wolf.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>

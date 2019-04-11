@@ -1,7 +1,17 @@
-﻿  Human.cpp
-C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\Human.cpp(120): warning C4018: '<': signed/unsigned mismatch
+﻿  Citizen.cpp
+C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\Citizen.cpp(59): warning C4018: '<': signed/unsigned mismatch
+  Dwarf.cpp
+  Human.cpp
+C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\Human.cpp(120): warning C4018: '<': signed/unsigned mismatch
   Nobbs.cpp
   polymorphism.cpp
-C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\polymorphism.cpp(15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\polymorphism.cpp(20): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Troll.cpp
+  Vampire.cpp
+  Werewolf.cpp
+  Wolf.cpp
+  Zombie.cpp
+C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\Zombie.cpp(33): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-  polymorphism.vcxproj -> C:\Users\qazth\Downloads\ICS4U\polymorphism\Debug\polymorphism.exe
+  LINK : C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\Debug\polymorphism.exe not found or not built by the last incremental link; performing full link
+  polymorphism.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\Debug\polymorphism.exe

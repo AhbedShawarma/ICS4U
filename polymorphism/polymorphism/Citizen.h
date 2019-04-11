@@ -9,6 +9,7 @@ protected:
 	std::string name;
 	std::string species;
 	std::string currency;
+	int numOfTaxesPayed;
 	int happiness;
 	int easeOfAnger;
 	int strength;
@@ -17,6 +18,7 @@ public:
 	Citizen(std::string name, std::string species, int happiness, int easeOfAnger, int strength);
 	bool isThreatened = false;
 	bool willPayTaxes = true;
+	static int numOfTaxesCollected;
 	//bool isWolf1Alive = true;
 	//bool isWolf2Alive = true;
 	std::string getName();
