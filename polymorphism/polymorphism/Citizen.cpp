@@ -7,6 +7,11 @@
 Citizen::Citizen(std::string name, std::string species, int happiness, int easeOfAnger, int strength) : name(name), species(species), happiness(happiness), easeOfAnger(easeOfAnger), strength(strength)
 {
 	std::cout << "This citizen is a " << species << ", their name is " << name << ".\n";
+	numOfTaxesPayed = 0;
+	isThreatened = false;
+	willPayTaxes = true;
+	triggerAction = false;
+
 }
 
 std::vector<Citizen*> Citizen::citizens;
@@ -21,52 +26,45 @@ std::string Citizen::getSpecies() {
 	return species;
 }
 
-void Citizen::payTaxes() {
+int Citizen::payTaxes() {
 
-	if (willPayTaxes) {
-		if ((rand() % happiness + 1) > 10 || isThreatened == true) {
-			std::cout << name << " paid their taxes in " << currency << ".\n";
-			happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
-			numOfTaxesPayed++;
-			numOfTaxesCollected++;
+	if ((rand() % happiness + 1) > 10 || isThreatened == true) {
+		std::cout << name << " paid their taxes in " << currency << ".\n";
+		happiness -= rand() % easeOfAnger + (1 + easeOfAnger * isThreatened);
+		numOfTaxesPayed++;
+		numOfTaxesCollected++;
+		return 0;
+	}
+
+	else {
+		if ((rand() % (100 - happiness) + 1) < 70) {
+			std::cout << name << " refused to pay their taxes.\n";
+			return 2;
 		}
-
 		else {
-			if ((rand() % (100 - happiness) + 1) < 50) {
-				attack();
-			}
-			else {
-				std::cout << name << " refused to pay their taxes.\n";
-			}
+			return 1;
 		}
 	}
-	else {
-		std::cout << name << " no longer pays tax.\n";
-	}
+	
 }
 
-void Citizen::attack() {
-	std::cout << name << " attacked out of anger!\n";
-
-	if ((rand() % strength + 1) > 20) {
-		std::cout << name;
-		delete wolves[0];
-		wolves.erase(wolves.begin());
-		//return true;
-	}
-	else {
-		//std::cout << name << " has been killed by the wolf!\n";
-		for (int i = 0; i < citizens.size(); i++) {
-			if (citizens[i]->getName() == getName()) {
-				delete citizens[i];
-				citizens.erase(citizens.begin() + i);
-				break;
-			}
-		}
-		//return false;
-	}
+int Citizen::getStrength() {
+	return strength;
 }
+
+bool Citizen::checkIfPaysTax() {
+	return willPayTaxes;
+}
+
+//bool Citizen::triggerAction() {
+//	if (happiness <= easeOfAnger) {
+//		return true;
+//	}
+//	return false;
+//}
 
 Citizen::~Citizen()
 {
+	std::cout << name << " has fainted!\n";
+
 }

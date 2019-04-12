@@ -13,6 +13,7 @@ void Nobbs::speak() {
 	else {
 		std::cout << name << ": You have made me angery! I will stop paying taxes unless you give me something.\n";
 		willPayTaxes = false;
+		triggerAction = true;
 	}
 }
 
@@ -26,10 +27,8 @@ void Nobbs::action() {
 	numOfTaxesCollected -= numOfTaxesPayed;
 	willPayTaxes = true;
 	happiness += 100 - easeOfAnger;
-
 }
 
 Nobbs::~Nobbs()
 {
-	std::cout << name << "has been killed!\n";
 }

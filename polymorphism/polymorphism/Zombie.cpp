@@ -13,8 +13,10 @@ void Zombie::speak() {
 		std::cout << name << ": grrlg...brains...\n";
 	}
 	else {
+		triggerAction = true;
 		willPayTaxes = false;
 		std::cout << name << ": YOU HAVE ANGERED ME! FULFIL MY REQUEST OR ELSE I WILL NEVER PAY TAXES!\n";
+
 	}
 }
 
@@ -24,7 +26,9 @@ void Zombie::thank() {
 }
 
 void Zombie::action() {
-	std::cout << name << ": YOU MUST BRING ME A BRAIN OF A CITIZEN!\nEnter the species of the citizen you would like to kill to get their brain:\n";
+	std::cout << name << ": YOU MUST BRING ME A BRAIN OF A CITIZEN!\n" <<
+		"Choose which citizen's brain you would like to take\n"
+		<< "(h - human, t - troll, d - dwarf, w - werewolf, n - Nobbs, v - vampire): ";
 	char citizenToKill;
 	std::cin >> citizenToKill;
 	int i;
@@ -36,19 +40,19 @@ void Zombie::action() {
 			}
 		}
 		if (i != citizens.size()) {
-			citizens[i]->attack();
-			//citizens.erase(citizens.begin() + i);
+			delete citizens[i];
+			citizens.erase(citizens.begin() + i);
 			break;
 		}
 		std::cout << "ENTER A VALID CITIZEN SPECIES!\n"
-			<< "(h - human, t - troll, d - dwarf, w - werewolf, n - Nobbs, v - vampire)\n";
+			<< "(h - human, t - troll, d - dwarf, w - werewolf, n - Nobbs, v - vampire): ";
 		std::cin >> citizenToKill;
 	}
 	willPayTaxes = true;
 	happiness += 100 - easeOfAnger;
+
 }
 
 Zombie::~Zombie()
 {
-	std::cout << name << "has been killed!\n";
 }

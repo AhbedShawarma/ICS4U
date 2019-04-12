@@ -1,17 +1,17 @@
 ﻿  Citizen.cpp
-C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\Citizen.cpp(59): warning C4018: '<': signed/unsigned mismatch
   Dwarf.cpp
   Human.cpp
-C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\Human.cpp(120): warning C4018: '<': signed/unsigned mismatch
   Nobbs.cpp
-  polymorphism.cpp
-C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\polymorphism.cpp(20): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Troll.cpp
   Vampire.cpp
   Werewolf.cpp
-  Wolf.cpp
+C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\Werewolf.cpp(40): warning C4018: '<': signed/unsigned mismatch
   Zombie.cpp
-C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\polymorphism\Zombie.cpp(33): warning C4018: '<': signed/unsigned mismatch
+C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\Zombie.cpp(37): warning C4018: '<': signed/unsigned mismatch
+  polymorphism.cpp
+C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\polymorphism.cpp(31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\polymorphism.cpp(44): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\polymorphism.cpp(75): warning C4018: '<': signed/unsigned mismatch
+C:\Users\qazth\Downloads\ICS4U\polymorphism\polymorphism\polymorphism.cpp(122): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-  LINK : C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\Debug\polymorphism.exe not found or not built by the last incremental link; performing full link
-  polymorphism.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\polymorphism\Debug\polymorphism.exe
+  polymorphism.vcxproj -> C:\Users\qazth\Downloads\ICS4U\polymorphism\Debug\polymorphism.exe

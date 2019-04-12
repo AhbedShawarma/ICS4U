@@ -13,6 +13,7 @@ void Vampire::speak() {
 	}
 	else {
 		willPayTaxes = false;
+		triggerAction = true;
 		std::cout << name << ": I have had it with you, if you want me to pay taxes, you must do me a favour.\n";
 	}
 }
@@ -25,19 +26,19 @@ void Vampire::thank() {
 void Vampire::action() {
 	std::cout << name << ": Ha! Now that you have agreed you cannot say no. You must give me a sample of your wolf's blood,\n"
 		<< "don't worry, theres only a 20% chance that your wolf lives.\n";
-	if ((rand() % 10 + 1) > 2) {
-		std::cout << name << ": Pity, the wolf died in the process.\n";
+	if ((rand() % 5 + 1) > 1) {
+		std::cout << name << ": Pity, the wolf fainted in the process.\n";
+		std::cout << name;
+		delete wolves[0];
 		wolves.erase(wolves.begin());
 	}
 	else {
 		std::cout << name << ": This wolf must be blessed, it survived.\n";
 	}
-
-	willPayTaxes = true;
 	happiness += 100 - easeOfAnger;
+	willPayTaxes = true;
 }
 
 Vampire::~Vampire()
 {
-	std::cout << name << "has been killed!\n";
 }

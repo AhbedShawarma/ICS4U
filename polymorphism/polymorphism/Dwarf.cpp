@@ -15,6 +15,8 @@ void Dwarf::speak() {
 	else {
 		std::cout << name << ": Ohhh ye got me mad! If ye want me to pay taxes e'er again, ye must give me something in return.";
 		willPayTaxes = false;
+		triggerAction = true;
+
 	}
 }
 
@@ -33,5 +35,4 @@ void Dwarf::action() {
 
 Dwarf::~Dwarf()
 {
-	std::cout << name << "has been killed!\n";
 }
