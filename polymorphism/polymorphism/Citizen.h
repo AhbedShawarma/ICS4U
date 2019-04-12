@@ -9,7 +9,7 @@ protected:
 	std::string name;
 	std::string species;
 	std::string currency;
-	int numOfTaxesPayed;
+	int numOfTaxesPaid;
 	int happiness;
 	int easeOfAnger;
 	int strength;
