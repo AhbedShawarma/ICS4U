@@ -15,6 +15,17 @@ Description: This program takes in a file that includes the dimensions of the ma
 #include <sstream>
 #include <thread>
 #include <chrono>
+#include <windows.h>
+
+std::string colourChanger(int colour = 7, std::string text = "") {
+	//pre:	take in an integer for the colour and a string (it does not need to take in parameters as it will use the default parameters to change the colour to gray)
+	//post:	changes the colour of the console output and returns text
+
+	// changes the colour of the console output based on the number the user entered
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colour);
+
+	return text;
+}
 
 void printMaze(std::vector<std::string>& vecToPrint, int height, int width) {
 	// pre:	 takes in a vector of strings and integer height and width, assumes that height is the number of strings in vecToPrint and width is the length of each string in vecToPrint
@@ -24,12 +35,17 @@ void printMaze(std::vector<std::string>& vecToPrint, int height, int width) {
 	for (int i = 0; i < height; i++) {
 		// for loop that iterates through the number of characters in each string in vecToPrint
 		for (int j = 0; j < width; j++) {
+			if (vecToPrint[i][j] == 'X' || vecToPrint[i][j] == '$')
+				colourChanger();
+			else
+				colourChanger(10);
 			// outputs the character at the jth position of the string at the ith element in vecToPrint
 			std::cout << vecToPrint[i][j];
 		}
 		// goes to next line to output the next element in vecToPrint on the next line (like a grid)
 		std::cout << std::endl;
 	}
+	colourChanger();
 }
 
 int main()
