@@ -1,2 +1,3 @@
 ﻿  searchingalgorithms.cpp
-  searchingalgorithms.vcxproj -> C:\Users\qazth\Downloads\ICS4U\searchingalgorithms\Debug\searchingalgorithms.exe
+C:\Users\qazth\Documents\GitHub\ICS4U\searchingalgorithms\searchingalgorithms\searchingalgorithms.cpp(172): warning C4018: '<': signed/unsigned mismatch
+  searchingalgorithms.vcxproj -> C:\Users\qazth\Documents\GitHub\ICS4U\searchingalgorithms\Debug\searchingalgorithms.exe
