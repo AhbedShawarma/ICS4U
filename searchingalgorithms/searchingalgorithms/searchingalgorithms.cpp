@@ -48,6 +48,63 @@ void printMaze(std::vector<std::string>& vecToPrint, int height, int width) {
 	colourChanger();
 }
 
+void animatePath(int x, int y, std::string directions, std::map<char, std::pair <int, int>> &dirMap, std::map<char, char> &output, std::vector<std::string>& vecToPrint, int height, int width, int sleepTime, bool animEachFrame) {
+	/* pre:	takes in integer values for x and y which should be set to the starting point of the maze, takes in a string of directions that should only contain characters d, r, u, l and $
+			takes in 2 different maps, both of which use d, r, u, l and possibly $ as keys. The keys for dirMap should map to a pair of integers that represent the values that should be added to x and y
+			takes in a vector of strings that needs to be printed (the maze), the width and height of the maze., the time each frame should be shown on screen (in seconds),
+			and takes in a bool that changes if each step in the path should be animated individually, or if the entire path is displayed at once
+	  post:	makes an animation (or simply outputs path, based on parameters) that displays a path on the screen with the coordinates of each step in the path*/
+	
+	// clears the screen
+	system("CLS");
+
+	// create a strigstream that stores the coordinates of the solution
+	std::stringstream coords;
+
+	// for loop that iterates through each direction in the solution to output it onto the maze
+	for (int i = 0; i < directions.size(); i++) {
+
+		// sets the character at the current coordinate corresponding to the character in the ith element of the solution
+		vecToPrint[y][x] = output[directions[i]];
+
+		// adds the current coordinates to solutionCoords
+		coords << "(" << y << ", " << x << ") ";
+
+		// adds to x and y based on the character in the ith element of the solution to know the next coordinate in the solution
+		x += dirMap[directions[i]].first;
+		y += dirMap[directions[i]].second;
+
+		// if animEachFrame is true, the animate each step of the path
+		if (animEachFrame) {
+			// clears the screen
+			system("CLS");
+			// calls on printMaze to output the maze along with the current path it is taking
+			printMaze(vecToPrint, height, width);
+			// outputs the coordinates of the current path
+			std::cout << "Current path: " << coords.str();
+			// waits for a variable amount of seconds and then continues (to make an animation of the program going to each coordinate in the solution)
+			std::this_thread::sleep_for(std::chrono::seconds(sleepTime));
+		}
+	}
+	// if animEachFrame is false, show the final path
+	if (!animEachFrame) {
+		// calls on printMaze to output the maze along with the current path it is taking
+		printMaze(vecToPrint, height, width);
+		// outputs the coordinates of the current path
+		std::cout << "Current path: " << coords.str();
+		// waits for 1 second and then continues (to make an animation of the program going to each coordinate in the solution)
+		std::this_thread::sleep_for(std::chrono::seconds(sleepTime));
+	}
+
+	// reset the maze so that the path that was displayed is no longer shown
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			if (vecToPrint[i][j] == '<' || vecToPrint[i][j] == '>' || vecToPrint[i][j] == '^' || vecToPrint[i][j] == 'v')
+				vecToPrint[i][j] = ' ';
+		}
+	}
+}
+
 int main()
 {
 	// open the file with the maze
@@ -76,13 +133,99 @@ int main()
 	// closes the file
 	mazeFile.close();
 
-	std::cout << "This is the maze that the file contained:" << std::endl;
+	std::cout << "Welcome to the maze solving aglorithm.\nPlease enter the point where the maze begins:" << std::endl;
+	// declares variables to store the starting x and y values
+	int startX, startY;
+	// loop that keeps looping until user enters a valid starting coordinate
+	while (true) {
+		// prompts user to enter starting x and y values and converts input as string to integer values so the input can be stored in startX and startY
+		std::cout << "Enter the x coordinate you are starting at: ";
+		std::cin >> startX;
+		// keeps prompting user to input until it is an integer
+		while (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(256, '\n');
+			std::cout << "Enter integer values only: ";
+			std::cin >> startX;
+		}
+		std::cout << "Enter the y coordinate you are starting at: ";
+		std::cin >> startY;
+		// keeps prompting user to input until it is an integer
+		while (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(256, '\n');
+			std::cout << "Enter integer values only: ";
+			std::cin >> startY;
+		}
+		// if the values entered by user are out of bounds (outside of the maze's size), output that so the user knows to change their input (and change colour to red)
+		if (startY > height || startY < 0 || startX > width || startX < 0)
+			std::cout << colourChanger(12, "That is an invalid starting point as the coordinate is outside of the maze's size.") << std::endl;
+		// if the coordinate is at a wall, output that to the user (chang colour to red)
+		else if (maze[startY][startX] == 'X')
+			std::cout << colourChanger(12, "That is an invalid starting point as there is a wall there.") << std::endl;
+		// if the coordinate is at the treasure, output that the treasure has been found and end the program (and change colour to green)
+		else if (maze[startY][startX] == '$') {
+			std::cout << colourChanger(10, "Your starting point is the location of the treasure, so the treasure has been found at (") << startY << ", " << startX << ")";
+			colourChanger();
+			return 0;
+		}
+		// else the user chose a valid coordinate to start at so break out of the loop
+		else
+			break;
+		// change the colour back to normal
+		colourChanger();
+
+	}
+	// clears the screen
+	system("CLS");
+	// output the maze with the user's chosen staring point
+	std::cout << "This is the maze and your starting point is indicated with a 'S':\n\n";
+	maze[startY][startX] = 'S';
 	// calls printMaze to ouptut the maze that was read
 	printMaze(maze, height, width);
+	
+	// declare an integer to store animation method
+	int typeOfAnim;
+	// prompts user to enter their preferred way to see the solution and stores it
+	std::cout << "\nHow would you like to display the solution?";
+	std::cout << "\nEnter " << colourChanger(3, "1"); 
+	std::cout << colourChanger(7, " to show all the paths the program tried before it found the solution");
+	std::cout << "\nEnter " << colourChanger(5, "2");
+	std::cout << colourChanger(7, " to only animate the correct path");
+	std::cout << "\nEnter " << colourChanger(6, "3");
+	std::cout << colourChanger(7, " to only display the correct path without animations") << std::endl;
+	std::cin >> input;
+	// if input is not 1, 2, or 3, keep prompting the user to only enter one of those numbers until one of the three are entered
+	while (input != "1" && input != "2" && input != "3") {
+		std::cout << "Only enter 1, 2, or 3 to choose how the maze's path is displayed:";
+		std::cin >> input;
+	}
+	typeOfAnim = std::stoi(input);
+	
 	// waits for keypress to continue
-	std::cout << "Press any key to start solving the maze";
+	std::cout << "\nPress any key to start solving the maze";
 	_getch();
+	
 
+	// creates a map that takes a char as a key that maps to a pair of integers
+	// the map is used to change the coordinates by adding the first integer to x and second integer to y
+	// these integers are based on the direction that the next coordinate is in the solution
+	// for example, if the solution says go down ('d'), add 0 to x and 1 to y
+	std::map<char, std::pair <int, int>> directionMap;
+	directionMap['d'] = std::make_pair(0, 1);
+	directionMap['r'] = std::make_pair(1, 0);
+	directionMap['u'] = std::make_pair(0, -1);
+	directionMap['l'] = std::make_pair(-1, 0);
+
+	// creates a map that takes in a char as a key that maps to another char
+	// this is used to ouput the correct direction arrow to the maze so the user can see the direction the solution is going in
+	// for example, if the solution says go down ('d'), the corresponding output would be 'v' (downwards arrow)
+	std::map<char, char> outputMap;
+	outputMap['d'] = 'v';
+	outputMap['r'] = '>';
+	outputMap['u'] = '^';
+	outputMap['l'] = '<';
+	outputMap['$'] = '$';
 
 	// creates a queue that stores the coordinates of the location in the maze that needs to be visited
 	// the string stores the directions that the program has followed to get to that location (right, left, up, down)
@@ -107,8 +250,8 @@ int main()
 	std::string solution;
 	// sets a bool variable to false (only true if the program reaches the end of the maze)
 	bool foundEnd = false;
-	// adds the coordinate (1, 1) to the queue as it is the starting point of the maze
-	nodeToVisit.push(std::make_pair(std::make_pair(1, 1), ""));
+	// adds the coordinate (startX, startY) to the queue as it is the starting point of the maze
+	nodeToVisit.push(std::make_pair(std::make_pair(startX, startY), ""));
 
 	// for loop that only exits when nodeToVisit is empty (all values are checked), and pops off the top node for each iteration to proceed to check next node
 	for (; nodeToVisit.size() > 0; nodeToVisit.pop()) {
@@ -125,6 +268,7 @@ int main()
 		// set isVisited at the coordinate to be true to check off the node as visited
 		isVisited[y][x] = true;
 
+
 		// if the end of the maze is at the current coordinate,
 		if (maze[y][x] == '$') {
 			// set foundEnd to true
@@ -134,6 +278,11 @@ int main()
 			// break out of the loop
 			break;
 		}
+
+		// if typeOfAnim is 1, then display each path that the program is trying to take to solve the maze
+		if (typeOfAnim == 1)
+			animatePath(startX, startY, path, directionMap, outputMap, maze, height, width, 1, false);
+
 
 		// Set of if statements that add adjacent coordinates as nodes to nodeToVisit to continue searching for the end of the maze:
 		// if the coordinate directly below the current coordinate is within the bounds of the maze,
@@ -159,59 +308,17 @@ int main()
 
 	// foundEnd is not true, output that there is no solution and end the program
 	if (!foundEnd) {
-		std::cout << "no valid solution" << std::endl;
+		std::cout << colourChanger(4, "\nThere is no valid solution for this maze at the given starting points.") << std::endl;
+		colourChanger();
 		return 0;
 	}
 
-	// set x and y to 1 (the starting coordinate)
-	x = 1;
-	y = 1;
-
-	// creates a map that takes a char as a key that maps to a pair of integers
-	// the map is used to change the coordinates by adding the first integer to x and second integer to y
-	// these integers are based on the direction that the next coordinate is in the solution
-	// for example, if the solution says go down ('d'), add 0 to x and 1 to y
-	std::map<char, std::pair <int, int>> directionMap;
-	directionMap['d'] = std::make_pair(0, 1);
-	directionMap['r'] = std::make_pair(1, 0);
-	directionMap['u'] = std::make_pair(0, -1);
-	directionMap['l'] = std::make_pair(-1, 0);
-
-	// creates a map that takes in a char as a key that maps to another char
-	// this is used to ouput the correct direction arrow to the maze so the user can see the direction the solution is going in
-	// for example, if the solution says go down ('d'), the corresponding output would be 'v' (downwards arrow)
-	std::map<char, char> outputMap;
-	outputMap['d'] = 'v';
-	outputMap['r'] = '>';
-	outputMap['u'] = '^';
-	outputMap['l'] = '<';
-	outputMap['$'] = '#';
-
-	// create a strigstream that stores the coordinates of the solution
-	std::stringstream solutionCoords;
-
-	// for loop that iterates through each direction in the solution to output it onto the maze
-	for (int i = 0; i < solution.size(); i++) {
-		// clears the screen
-		system("CLS");
-
-		// sets the character at the current coordinate corresponding to the character in the ith element of the solution
-		maze[y][x] = outputMap[solution[i]];
-
-		// adds the current coordinates to solutionCoords
-		solutionCoords << "(" << y << ", " << x << ") ";
-		
-		// adds to x and y based on the character in the ith element of the solution to know the next coordinate in the solution
-		x += directionMap[solution[i]].first;
-		y += directionMap[solution[i]].second;
-
-		// calls on printMaze to output the maze along with the current path it is taking
-		printMaze(maze, height, width);
-		// outputs the coordinates of the current path
-		std::cout << "Current path: " << solutionCoords.str();
-		// waits for 1 second and then continues (to make an animation of the program going to each coordinate in the solution)
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
+	// if typeOfAnim equals 2, animate each frame of the maze's correct path
+	if (typeOfAnim == 2)
+		animatePath(startX, startY, solution, directionMap, outputMap, maze, height, width, 1, true);
+	// else, only display the correct path
+	else
+		animatePath(startX, startY, solution, directionMap, outputMap, maze, height, width, 1, false);
 
 	return 0;
 }
